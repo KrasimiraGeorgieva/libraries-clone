@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\BookmarkController;
+use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -33,6 +36,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::resource('bookmarks', BookmarkController::class);
+    Route::resource('categories', CategoryController::class);
+    Route::resource('libraries',LibraryController::class)->names([
+        'index' => 'libraries',
+        'show' => 'library'
+    ]);
 });
 
 require __DIR__.'/auth.php';
