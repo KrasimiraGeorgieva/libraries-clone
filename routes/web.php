@@ -38,7 +38,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('bookmarks', BookmarkController::class);
-    Route::resource('categories', CategoryController::class);
+    Route::resource('categories', CategoryController::class)->names([
+        'index' => 'categories',
+        'store' => 'category'
+    ]);
     Route::resource('libraries',LibraryController::class)->names([
         'index' => 'libraries',
         'show' => 'library'
